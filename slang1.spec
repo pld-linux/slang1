@@ -126,10 +126,11 @@ mv -f autoconf/aclocal.m4 acinclude.m4
 mv -f autoconf/configure.in .
 aclocal
 autoconf
-(cd demo
-cp -f ../acinclude.m4 .
-aclocal
-autoconf)
+cd demo
+	cp -f ../acinclude.m4 .
+	aclocal
+	autoconf
+cd ..
 %configure
 
 %{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC"
