@@ -14,7 +14,7 @@ Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
 Version:	1.4.9
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -29,6 +29,10 @@ Patch3:		%{name}-uclibc_ac_fix.patch
 Patch4:		%{name}-remove_unused_terminfo_paths.patch
 Patch5:		%{name}-cc.patch
 Patch6:		%{name}-uClibc.patch
+# utf8 patches: http://www.suse.de/~nadvornik/slang/
+Patch7:		%{name}-debian-utf8.patch
+Patch8:		%{name}-utf8-acs.patch
+Patch9:		%{name}-utf8-fix.patch
 URL:		http://www.s-lang.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -205,6 +209,9 @@ Bibliotecas estАticas para desenvolvimento com slang.
 %patch4 -p1
 %patch5 -p1
 %{?with_uClibc:%patch6 -p1}
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
 cp /usr/share/automake/config.sub autoconf
@@ -239,6 +246,10 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 %{__make} install-links \
 	DESTDIR=$RPM_BUILD_ROOT
 
+ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.1
+ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
+ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
+
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -260,10 +271,10 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*.txt
-%attr(755,root,root) %{_libdir}/libslang.so
+%attr(755,root,root) %{_libdir}/libslang*.so
 %{_includedir}
 %{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libslang.a
+%{_libdir}/libslang*.a
