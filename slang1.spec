@@ -19,7 +19,6 @@ Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
-#Patch2:		
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %{?BOOT:BuildRequires:	uClibc-devel-BOOT}
 
