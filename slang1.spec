@@ -5,8 +5,8 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
-Version:	1.4.0
-Release:	2
+Version:	1.4.1
+Release:	1
 Serial:		1
 License:	GPL
 Group:		Libraries
