@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.4
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -19,8 +19,9 @@ Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Patch3:		%{name}-keymap.patch
 %{?BOOT:BuildRequires:	uClibc-devel-BOOT}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/slang
 
@@ -130,6 +131,7 @@ Group:		Development/Libraries
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %configure
