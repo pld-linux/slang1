@@ -5,8 +5,8 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
-Version:   	1.3.6
-Release:     	2
+Version:   	1.3.7
+Release:     	1
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
@@ -123,7 +123,7 @@ make DL_LIB="-ldl" ARCH="elf"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_prefix}/src/slang,%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_prefix}/src/examples/slang,%{_bindir}}
 
 make install install-elf install-links \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -133,7 +133,7 @@ install -s slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
-cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_prefix}/src/slang
+cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_prefix}/src/examples/%{name}
 
 gzip -9fn doc/sgml/* doc/*.txt 
 
@@ -155,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}/slang
 
-%{_prefix}/src/slang
+%{_prefix}/src//examples/%{name}
 
 %files static
 %defattr(644,root,root,755)
