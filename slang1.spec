@@ -55,7 +55,7 @@ Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir yorumlayýcýdýr.
 C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye çevirmek oldukça
 kolaydýr.
 
-%package	devel
+%package devel
 Summary:   	header files for slang C like language
 Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache 
 Summary(fr):	En-têtes pour le langage slang
@@ -89,7 +89,7 @@ la documentation pour vous aider à écrire ces applications.
 Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk dosyalarý
 ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
 
-%package	static
+%package static
 Summary:     	slang static library
 Summary(pl): 	Biblioteka statyczna slang
 Group:       	Development/Libraries
@@ -111,16 +111,13 @@ Biblioteka statyczna slang.
 %patch1 -p1 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" \
-ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" \
 LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=%{_prefix} \
-	--includedir=%{_includedir}/slang \
-	%{_target_platform}
+	--includedir=%{_includedir}/slang
 	
-make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
-make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS -g"
+make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS -g"
 cd slsh
 make DL_LIB="-ldl" ARCH="elf"
 
