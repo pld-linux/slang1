@@ -1,7 +1,7 @@
 # _without_embed - don't build uClibc version
 %define		docver  1.4
 Summary:	shared library for C like extension language
-Summary(de):	Shared Library für eine C-artige Sprache 
+Summary(de):	Shared Library für eine C-artige Sprache
 Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
@@ -74,7 +74,7 @@ yorumlayýcýdýr. C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye
 
 %package devel
 Summary:	header files for slang C like language
-Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache 
+Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache
 Summary(fr):	En-têtes pour le langage slang
 Summary(pl):	Pliki nag³ówkowe dla slanga
 Summary(tr):	slang dili için statik kitaplýk ve baþlýk dosyalarý
@@ -171,12 +171,12 @@ install src/slang.h src/slcurses.h $RPM_BUILD_ROOT%{uclibc_prefix}/include/slang
 
 %{__make} install install-elf install-links \
 	DESTDIR=$RPM_BUILD_ROOT
-	
-install slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
+
+install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-gzip -9nf doc/sgml/* doc/*.txt 
+gzip -9nf doc/sgml/* doc/*.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
