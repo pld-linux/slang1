@@ -1,3 +1,5 @@
+# conditional build:
+# --with uClibc		- used in building against uClibc
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library für eine C-artige Sprache
@@ -22,6 +24,7 @@ Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-uclibc_ac_fix.patch
 Patch4:		%{name}-remove_unused_terminfo_paths.patch
 Patch5:		%{name}-cc.patch
+Patch6:		%{name}-uClibc.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -196,6 +199,7 @@ Bibliotecas estáticas para desenvolvimento com slang.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%{?_with_uClibc:%patch6 -p1}
 
 %build
 mv -f autoconf/aclocal.m4 acinclude.m4
