@@ -1,17 +1,19 @@
-Summary:     shared library for C like extension language
-Summary(de): Shared Library für eine C-artige Sprache 
-Summary(fr): Bibliothèque partagée pour le langage d'extension C like
-Summary(tr): C benzeri dil için ortak kitaplýk
-Name:        slang
-Version:     1.2.2
-Release:     2
-Copyright:   GPL
-Group:       Libraries
-Source:      ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
-Patch0:      slang-1.2.2-security.patch
-Patch1:      patch.slang-1.2.2.keypad.1
-URL:         ftp://space.mit.edu/pub/davis/slang/
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:    	shared library for C like extension language
+Summary(de):	Shared Library für eine C-artige Sprache 
+Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
+Summary(pl):	Biblioteka Slang
+Summary(tr):	C benzeri dil için ortak kitaplýk
+Name:      	slang
+Version:   	1.2.2
+Release:     	3
+Copyright:   	GPL
+Group:       	Libraries
+Group(pl):	Biblioteki
+Source:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
+Patch0:      	slang-1.2.2-security.patch
+Patch1:      	patch.slang-1.2.2.keypad.1
+URL:         	ftp://space.mit.edu/pub/davis/slang/
+Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
 Slang (pronounced ``sssslang'') is a powerful stack based interpreter that
@@ -37,16 +39,29 @@ developper et débugger rapidement l'application intégrée de façon sûre et
 efficace. Comme slang ressemble à C, il est facile de recoder les procédures
 slang en C si besoin est.
 
+%description -l pl
+Slang jest opart± o terminfo bibliotek± do obs³ugi terminali znakowych,
+posiadaj±c± wbudowany interpreter jêzyka podobnego sk³adniowo do C.
+Na pocz±tku by³ on przeznaczony aby ³atwo da³ siê osadzaæ w aplikacjê i
+uczyniæ j± rozszerzon±. Slang zapewnia mechanizmy u³atwiaj±ce szybkie
+tworzenie rozbudowanych, ³atwo konfigurowalnych aplikacji. Slang równie¿
+umo¿liwia proste prze¶ledzenie ewentualnych b³êdów w aplikacjach w
+bezpieczny i wydajny sposób.
+
 %description -l tr
 Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir yorumlayýcýdýr.
 C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye çevirmek oldukça
 kolaydýr.
 
 %package devel
-Summary:     header files for slang C like language
-Summary(de): Header-Dateien für eine Slangvariante der C-Sprache 
-Group:       Development/Libraries
-Requires:    %{name} = %{version}
+Summary:   	header files for slang C like language
+Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache 
+Summary(fr):	En-têtes pour le langage slang
+Summary(pl):	Pliki nag³ówkowe dla slanga
+Summary(tr):	slang dili için statik kitaplýk ve baþlýk dosyalarý
+Group:       	Development/Libraries
+Group(pl):   	Programowanie/Biblioteki
+Requires:    	%{name} = %{version}
 
 %description devel
 This package contains header files required to develop slang-based
@@ -58,16 +73,35 @@ Dieses Paket enthält Header-Dateien zum Entwickeln von slang-basierten
 Anwendungen. Dokumentation zum Schreiben von slang-basierten Anwendungen ist
 enthalten.
 
+%description -l pl devel
+Pakiet ten zawiera pliki nag³ówkowe slang. Znajduje siê tutaj
+równie¿ dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod
+ta bibliotekê.
+
+%description -l fr devel
+Ce paquetage contient les bibliothèques statiques et les en-têtes
+slang pour développer des applications en slang. Il contient aussi
+la documentation pour vous aider à écrire ces applications.
+
+%description -l tr devel
+Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk dosyalarý
+ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
+
 %package static
-Summary:     slang static library
-Group:       Development/Libraries
-Requires:    %{name}-devel = %{version}
+Summary:     	slang static library
+Summary(pl): 	Biblioteka statyczna slang
+Group:       	Development/Libraries
+Group(pl):   	Programowanie/Biblioteki
+Requires:    	%{name}-devel = %{version}
 
 %description static
 This package contains the slang static libraries.
 
 %description -l de static
 Dieses Paket enthält die statischen Libraries.
+
+%description -l pl static
+Biblioteka statyczna slang.
 
 %prep
 %setup -q -n %{name}
@@ -77,7 +111,7 @@ chmod +x configure
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr \
 	--includedir=/usr/include/slang
 make elf
@@ -93,6 +127,8 @@ mv doc/text/* .
 
 strip $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
 
+gzip -9fn {cref,cslang,slang,slangfun,changes}.txt
+
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -100,16 +136,18 @@ strip $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%attr(755, root, root) /usr/lib/lib*.so.*.*
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/lib/lib*.so.*.*
 
 %files devel
-%defattr(644, root, root, 755)
-%doc {cref,cslang,slang,slangfun,changes}.txt
+%defattr(644,root,root,755)
+%doc {cref,cslang,slang,slangfun,changes}.txt*
 /usr/lib/libslang.so
 /usr/include/slang
 
 %files static
-%attr(644, root, root) /usr/lib/libslang.a
+%defattr(644,root,root,755)
+/usr/lib/libslang.a
 
 %changelog
 * Sat Dec 12 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
