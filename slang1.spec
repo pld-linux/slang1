@@ -17,6 +17,8 @@ Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-uclibc_ac_fix.patch
+Patch4:		%{name}-ac25x.patch
+BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -118,11 +120,17 @@ Biblioteka statyczna slang.
 %patch3 -p1
 
 %build
-(cd autoconf ; mv -f acsite.m4 aclocal.m4 ; autoconf ; cp -f configure ..)
-(cd demo ; cp -f ../autoconf/aclocal.m4 . ; autoconf)
+mv -f autoconf/aclocal.m4 acinclude.m4
+mv -f autoconf/configure.in .
+aclocal
+autoconf
+(cd demo
+cp -f ../acinclude.m4 .
+aclocal
+autoconf)
 %configure
 
-%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC"
+%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC" CC="%{__cc}"
 %{__make} all CFLAGS="%{rpmcflags}"
 %{__make} -C slsh DL_LIB="-ldl" ARCH="elf" CFLAGS="%{rpmcflags}"
 
