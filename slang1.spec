@@ -10,8 +10,8 @@ Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
 Source:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
-Patch0:      	slang-1.2.2-security.patch
-Patch1:      	patch.slang-1.2.2.keypad.1
+Patch0:      	slang-security.patch
+Patch1:      	slang-keypad.1.patch
 URL:         	ftp://space.mit.edu/pub/davis/slang/
 Buildroot:   	/tmp/%{name}-%{version}-root
 
