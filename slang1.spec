@@ -123,7 +123,7 @@ Summary(ru):	Библиотеки и хедеры для C-подобного языка S-Lang
 Summary(tr):	slang dili iГin statik kitaplЩk ve baЧlЩk dosyalarЩ
 Summary(uk):	Б╕бл╕отеки та хедери для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Obsoletes:	libslang1-devel
 
 %description devel
