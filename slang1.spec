@@ -5,50 +5,52 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
-Version:	1.4.1
+Version:	1.4.2
 Release:	1
-Serial:		1
+Epoch:		1
 License:	GPL
 Group:		Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
-Patch0:		slang-security.patch
+Patch0:		%{name}-security.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Slang (pronounced ``sssslang'') is a powerful stack based interpreter that
-supports a C-like syntax.  It has been designed from the beginning to be
-easily embedded into a program to make it extensible. Slang also provides a
-way to quickly develop and debug the application embedding it in a safe and
-efficient manner.  Since slang resembles C, it is easy to recode slang
-procedures in C if the need arises.
+Slang (pronounced ``sssslang'') is a powerful stack based interpreter
+that supports a C-like syntax. It has been designed from the beginning
+to be easily embedded into a program to make it extensible. Slang also
+provides a way to quickly develop and debug the application embedding
+it in a safe and efficient manner. Since slang resembles C, it is easy
+to recode slang procedures in C if the need arises.
 
 %description -l de
 Slang (sprich ``sssslang'') ist ein leistungsfähiger stapelbasierter
-Interpreter, der eine C-ähnliche Syntax unterstützt. Er kann auf einfache
-Weise in ein Programm eingebettet werden, damit dieses erweiterbar wird.
-Slang bietet außerdem eine Möglichkeit zum schnellen Entwickeln und
-Debuggen der  Anwendung, in die er eingebettet ist. Da Slang C ähnlich ist,
-können Slang-Vorgänge einfach in C umgeschrieben werden.
+Interpreter, der eine C-ähnliche Syntax unterstützt. Er kann auf
+einfache Weise in ein Programm eingebettet werden, damit dieses
+erweiterbar wird. Slang bietet außerdem eine Möglichkeit zum schnellen
+Entwickeln und Debuggen der Anwendung, in die er eingebettet ist. Da
+Slang C ähnlich ist, können Slang-Vorgänge einfach in C umgeschrieben
+werden.
 
 %description -l fr
-slang (prononcez « sssslang ») est un interpréteur puissant offrant une
-syntaxe à la C. Il a été conçu au début pour être facilement intégré dans
-un programme afin de le rendre extensible. slang offre aussi le moyen de
-developper et débugger rapidement l'application intégrée de façon sûre et
-efficace. Comme slang ressemble à C, il est facile de recoder les
-procédures slang en C si besoin est.
+slang (prononcez « sssslang ») est un interpréteur puissant offrant
+une syntaxe à la C. Il a été conçu au début pour être facilement
+intégré dans un programme afin de le rendre extensible. slang offre
+aussi le moyen de developper et débugger rapidement l'application
+intégrée de façon sûre et efficace. Comme slang ressemble à C, il est
+facile de recoder les procédures slang en C si besoin est.
 
 %description -l pl
-Slang jest opart± o terminfo bibliotek± do obs³ugi terminali znakowych,
-posiadaj±c± wbudowany interpreter jêzyka podobnego sk³adniowo do C. Na
-pocz±tku by³ on przeznaczony aby ³atwo da³ siê osadzaæ w aplikacjê i
-uczyniæ j± rozszerzon±. Slang zapewnia mechanizmy u³atwiaj±ce szybkie
-tworzenie rozbudowanych, ³atwo konfigurowalnych aplikacji. Slang równie¿
-umo¿liwia proste prze¶ledzenie ewentualnych b³êdów w aplikacjach w
-bezpieczny i wydajny sposób.
+Slang jest opart± o terminfo bibliotek± do obs³ugi terminali
+znakowych, posiadaj±c± wbudowany interpreter jêzyka podobnego
+sk³adniowo do C. Na pocz±tku by³ on przeznaczony aby ³atwo da³ siê
+osadzaæ w aplikacjê i uczyniæ j± rozszerzon±. Slang zapewnia
+mechanizmy u³atwiaj±ce szybkie tworzenie rozbudowanych, ³atwo
+konfigurowalnych aplikacji. Slang równie¿ umo¿liwia proste
+prze¶ledzenie ewentualnych b³êdów w aplikacjach w bezpieczny i wydajny
+sposób.
 
 %description -l tr
 Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir
@@ -68,17 +70,17 @@ Requires:	%{name} = %{version}
 
 %description devel
 This package contains header files required to develop slang-based
-applications.  It also includes documentation to help you write slang-based
-apps.
+applications. It also includes documentation to help you write
+slang-based apps.
 
 %description -l de devel
 Dieses Paket enthält Header-Dateien zum Entwickeln von slang-basierten
-Anwendungen. Dokumentation zum Schreiben von slang-basierten Anwendungen
-ist enthalten.
+Anwendungen. Dokumentation zum Schreiben von slang-basierten
+Anwendungen ist enthalten.
 
 %description -l fr devel
-Ce paquetage contient les bibliothèques statiques et les en-têtes slang
-pour développer des applications en slang. Il contient aussi la
+Ce paquetage contient les bibliothèques statiques et les en-têtes
+slang pour développer des applications en slang. Il contient aussi la
 documentation pour vous aider à écrire ces applications.
 
 %description -l pl devel
@@ -87,7 +89,8 @@ dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod ta bibliotekê.
 
 %description -l tr devel
 Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk
-dosyalarý ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
+dosyalarý ve kitaplýklarýn yanýsýra slang yardým belgelerini de
+içerir.
 
 %package static
 Summary:	slang static library
