@@ -5,13 +5,13 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
-Version:   	1.3.7
+Version:   	1.3.8
 Release:     	1
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
-Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}-%{version}.tar.gz
+Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}-%{version}.tar.bz2
 Source1:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
@@ -144,9 +144,8 @@ gzip -9fn doc/sgml/* doc/*.txt
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
@@ -155,7 +154,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}/slang
 
-%{_prefix}/src//examples/%{name}
+%{_prefix}/src/examples/%{name}
 
 %files static
 %defattr(644,root,root,755)
