@@ -224,8 +224,6 @@ install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-gzip -9nf doc/sgml/* doc/*.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -239,7 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/html doc/*.gz
+%doc doc/html doc/sgml/* doc/*.txt
 %attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}
 %{_examplesdir}/%{name}-%{version}
