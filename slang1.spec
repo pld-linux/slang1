@@ -5,14 +5,13 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
 Version:   	1.2.2
-Release:     	3
+Release:     	5
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
 Source:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
 Patch0:      	slang-security.patch
 Patch1:      	slang-keypad.1.patch
-URL:         	ftp://space.mit.edu/pub/davis/slang/
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
