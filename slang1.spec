@@ -160,11 +160,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libslang.a
-
-%changelog
-* Fri May 21 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.3.6-1]
-- spec based on RH version,
-- rewrited by Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl> and Artur Frysiak
-  <wiget@pld.org.pl>
-- pl translation by Wojtek ¦lusarczyk <wojtek@shadow.eu.org>.
