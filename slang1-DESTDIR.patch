@@ -1,0 +1,123 @@
+diff -Nru slang-1.4.3/modules/Makefile.in slang-1.4.3.new/modules/Makefile.in
+--- slang-1.4.3/modules/Makefile.in	Sun Feb  4 07:32:54 2001
++++ slang-1.4.3.new/modules/Makefile.in	Tue Feb  6 11:05:57 2001
+@@ -12,7 +12,7 @@
+ #---------------------------------------------------------------------------
+ # Installation location of the modules
+ #---------------------------------------------------------------------------
+-MODULE_INSTALL_DIR = @libdir@/slang/modules
++MODULE_INSTALL_DIR = @libdir@/slang
+ INSTALL		= @INSTALL@
+ INSTALL_DATA	= @INSTALL_DATA@
+ MKINSDIR	= ../autoconf/mkinsdir.sh
+@@ -20,7 +20,6 @@
+ # DESTDIR is designed to facilitate making packages.  Normally it is empty
+ #---------------------------------------------------------------------------
+ DESTDIR =
+-DEST_MODULEDIR = $(DESTDIR)$(MODULE_INSTALL_DIR)
+ #---------------------------------------------------------------------------
+ RPATH = @RPATH@
+ 
+@@ -41,11 +40,11 @@
+ 	$(CC_SHARED) $(INCS) fcntl-module.c -o fcntl-module.so $(LIBS)
+ 
+ install: all
+-	-$(MKINSDIR) $(DEST_MODULEDIR)
++	-$(MKINSDIR) $(DESTDIR)$(MODULE_INSTALL_DIR)
+ 	@for i in $(MODULES); \
+ 	do \
+-		echo $(INSTALL_DATA) $$i $(DEST_MODULEDIR); \
+-		$(INSTALL_DATA) $$i $(DEST_MODULEDIR); \
++		echo $(INSTALL_DATA) $$i $(DESTDIR)$(MODULE_INSTALL_DIR); \
++		$(INSTALL_DATA) $$i $(DESTDIR)$(MODULE_INSTALL_DIR); \
+ 	done
+ clean:
+ 	-/bin/rm -f $(MODULES) *~
+diff -Nru slang-1.4.3/src/Makefile.in slang-1.4.3.new/src/Makefile.in
+--- slang-1.4.3/src/Makefile.in	Sun Feb  4 07:33:04 2001
++++ slang-1.4.3.new/src/Makefile.in	Tue Feb  6 11:03:14 2001
+@@ -34,8 +34,8 @@
+ #---------------------------------------------------------------------------
+ prefix = @prefix@
+ exec_prefix = @exec_prefix@
+-install_lib_dir = @libdir@
+-install_include_dir = @includedir@
++libdir = @libdir@
++includedir = @includedir@
+ install_doc_dir = $(prefix)/doc/slang
+ DOC_FILES = ../changes.txt ../COPY* ../doc/slangdoc.html ../doc/text/*.txt
+ MODULE_INSTALL_DIR = @libdir@/slang/modules
+@@ -43,9 +43,6 @@
+ # DESTDIR is designed to facilitate making packages.  Normally it is empty
+ #---------------------------------------------------------------------------
+ DESTDIR =
+-DEST_LIBDIR = $(DESTDIR)$(install_lib_dir)
+-DEST_DOCDIR = $(DESTDIR)$(install_doc_dir)
+-DEST_INCDIR = $(DESTDIR)$(install_include_dir)
+ 
+ #---------------------------------------------------------------------------
+ # Misc commands (safe to leave these untouched)
+@@ -135,41 +132,38 @@
+ # Intallation rules
+ #---------------------------------------------------------------------------
+ install: install_basic_lib install_docs
+-install_basic_lib: $(DEST_LIBDIR) $(DEST_INCDIR) $(OBJDIR_NORMAL_LIB)
+-	@echo installing $(OBJDIR_NORMAL_LIB) in $(DEST_LIBDIR)
+-	$(INSTALL_DATA) $(OBJDIR_NORMAL_LIB) $(DEST_LIBDIR)
+-	$(RANLIB) $(DEST_LIBDIR)/$(NORMAL_LIB)
+-	@echo installing slang.h and slcurses.h in $(DEST_INCDIR)
+-	$(INSTALL_DATA) $(SRCDIR)/slang.h $(DEST_INCDIR)
+-	$(INSTALL_DATA) $(SRCDIR)/slcurses.h $(DEST_INCDIR)
++
++install_basic_lib: $(OBJDIR_NORMAL_LIB)
++	$(MKINSDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir)
++	@echo installing $(OBJDIR_NORMAL_LIB) in $(DESTDIR)$(libdir)
++	$(INSTALL_DATA) $(OBJDIR_NORMAL_LIB) $(DESTDIR)$(libdir)
++	$(RANLIB) $(DESTDIR)/$(libdir)/$(NORMAL_LIB)
++	@echo installing slang.h and slcurses.h in $(DESTDIR)$(includedir)
++	$(INSTALL_DATA) $(SRCDIR)/slang.h $(DESTDIR)$(includedir)
++	$(INSTALL_DATA) $(SRCDIR)/slcurses.h $(DESTDIR)$(includedir)
++
+ install_docs: $(DEST_DOCDIR)
++	$(MKINSDIR) $(DESTDIR)$(install_doc_dir)
+ 	@for i in $(DOC_FILES); \
+ 	do \
+-		echo $(INSTALL_DATA) $$i $(DEST_DOCDIR)/; \
+-		$(INSTALL_DATA) $$i $(DEST_DOCDIR); \
++		echo $(INSTALL_DATA) $$i $(DESTDIR)$(install_doc_dir); \
++		$(INSTALL_DATA) $$i $(DESTDIR)$(install_doc_dir); \
+ 	done
+-$(DEST_DOCDIR):
+-	$(MKINSDIR) $(DEST_DOCDIR)
+-$(DEST_INCDIR):
+-	$(MKINSDIR) $(DEST_INCDIR)
+-$(DEST_LIBDIR):
+-	$(MKINSDIR) $(DEST_LIBDIR)
++
+ install-elf: elf install
+-	-$(RM) $(DEST_LIBDIR)/$(ELFLIB)
+-	-$(RM) $(DEST_LIBDIR)/$(ELFLIB_MAJOR)
+-	@echo installing $(ELFLIB_MAJOR_MINOR) in $(DEST_LIBDIR)
+-	$(INSTALL_DATA) $(ELFDIR_ELF_LIB) $(DEST_LIBDIR)
++	$(MKINSDIR) $(DESTDIR)$(libdir)
++	@echo installing $(ELFLIB_MAJOR_MINOR) in $(DESTDIR)$(libdir)
++	$(INSTALL_DATA) $(ELFDIR_ELF_LIB) $(DESTDIR)$(libdir)
+ 	@echo creating symbolic links to $(ELFLIB_MAJOR_MINOR)
+-	-cd $(DEST_LIBDIR); $(LN) $(ELFLIB_MAJOR_MINOR) $(ELFLIB)
++	-cd $(DESTDIR)$(libdir); $(LN) $(ELFLIB_MAJOR_MINOR) $(ELFLIB)
+ 	@echo ""
+-	@echo $(ELFLIB_MAJOR_MINOR) created in $(DEST_LIBDIR).
++	@echo $(ELFLIB_MAJOR_MINOR) created in $(DESTDIR)$(libdir).
+ 	@echo The link $(ELFLIB) to $(ELFLIB_MAJOR_MINOR) was also created.
+ 	@echo ""
++
+ install-links:
+-	-$(RM) $(DEST_LIBDIR)/$(ELFLIB)
+-	-$(RM) $(DEST_LIBDIR)/$(ELFLIB_MAJOR)
+-	cd $(DEST_LIBDIR); $(LN) $(ELFLIB_MAJOR_MINOR) $(ELFLIB_MAJOR)
+-	cd $(DEST_LIBDIR); $(LN) $(ELFLIB_MAJOR) $(ELFLIB)
++	cd $(DESTDIR)$(libdir); $(LN) $(ELFLIB_MAJOR_MINOR) $(ELFLIB_MAJOR)
++	cd $(DESTDIR)$(libdir); $(LN) $(ELFLIB_MAJOR) $(ELFLIB)
+ 	@echo
+ 	@echo A link $(ELFLIB_MAJOR) to $(ELFLIB_MAJOR_MINOR) was created.
+ 	@echo A link $(ELFLIB) to $(ELFLIB_MAJOR) was created.
