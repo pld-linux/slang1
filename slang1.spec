@@ -207,6 +207,7 @@ Bibliotecas estáticas para desenvolvimento com slang.
 %{?_with_uClibc:%patch6 -p1}
 
 %build
+cp /usr/share/automake/config.sub autoconf
 mv -f autoconf/aclocal.m4 acinclude.m4
 mv -f autoconf/configure.in .
 %{__aclocal}
