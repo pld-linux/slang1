@@ -5,17 +5,22 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
-Version:	1.4.2
+Version:	1.4.3
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		%{name}-security.patch
+Patch1:		%{name}-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_includedir	%{_prefix}/include/slang
 
 %description
 Slang (pronounced ``sssslang'') is a powerful stack based interpreter
@@ -64,6 +69,7 @@ Summary(fr):	En-têtes pour le langage slang
 Summary(pl):	Pliki nag³ówkowe dla slanga
 Summary(tr):	slang dili için statik kitaplýk ve baþlýk dosyalarý
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -96,6 +102,7 @@ içerir.
 Summary:	slang static library
 Summary(pl):	Biblioteka statyczna slang
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -112,31 +119,25 @@ Biblioteka statyczna slang.
 %prep
 %setup  -q -a1
 %patch0 -p1
+%patch1 -p1
 
 %build
-LDFLAGS="-s" \
-./configure %{_target} \
-	--prefix=%{_prefix} \
-	--includedir=%{_includedir}/slang
+%configure
 	
-%{__make} elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
-%{__make} all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
-cd slsh
-%{__make} DL_LIB="-ldl" ARCH="elf"
+%{__make} elf
+%{__make} all
+%{__make} -C slsh DL_LIB="-ldl" ARCH="elf"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_prefix}/src/examples/slang,%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
 %{__make} install install-elf install-links \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	install_include_dir=$RPM_BUILD_ROOT%{_includedir}/slang
+	DESTDIR=$RPM_BUILD_ROOT
 	
-install -s slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
+install slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
-cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_prefix}/src/examples/%{name}
+cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 gzip -9nf doc/sgml/* doc/*.txt 
 
@@ -153,12 +154,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/sgml/* doc/*.txt*
-
+%doc doc/sgml/* doc/*.gz
 %attr(755,root,root) %{_libdir}/libslang.so
-%{_includedir}/slang
-
-%{_prefix}/src/examples/%{name}
+%{_includedir}
+%{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
