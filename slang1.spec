@@ -14,7 +14,7 @@ Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
 Version:	1.4.9
-Release:	6
+Release:	7
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -209,9 +209,9 @@ Bibliotecas estАticas para desenvolvimento com slang.
 %patch4 -p1
 %patch5 -p1
 %{?with_uClibc:%patch6 -p1}
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
+#%patch6 -p1
+#%patch7 -p1
+#%patch8 -p1
 
 %build
 cp /usr/share/automake/config.sub autoconf
