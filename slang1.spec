@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# --with uClibc		- used in building against uClibc
+%bcond_with	uClibc	# use hacks to build against uClibc
 #
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
@@ -14,7 +14,7 @@ Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
 Version:	1.4.9
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -32,8 +32,8 @@ Patch6:		%{name}-uClibc.patch
 URL:		http://www.s-lang.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libslang1
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/slang
 
@@ -124,7 +124,7 @@ Summary(ru):	Библиотеки и хедеры для C-подобного языка S-Lang
 Summary(tr):	slang dili iГin statik kitaplЩk ve baЧlЩk dosyalarЩ
 Summary(uk):	Б╕бл╕отеки та хедери для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	libslang1-devel
 
 %description devel
@@ -174,7 +174,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com slang
 Summary(ru):	Статическая библиотека для C-подобного языка S-Lang
 Summary(uk):	Статична б╕бл╕отека для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 This package contains the slang static libraries.
@@ -204,7 +204,7 @@ Bibliotecas estАticas para desenvolvimento com slang.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%{?_with_uClibc:%patch6 -p1}
+%{?with_uClibc:%patch6 -p1}
 
 %build
 cp /usr/share/automake/config.sub autoconf
@@ -219,9 +219,14 @@ cp -f ../acinclude.m4 .
 cd ..
 %configure
 
-%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC"
-%{__make} all CFLAGS="%{rpmcflags}"
-%{__make} -C slsh DL_LIB="-ldl" ARCH="elf" CFLAGS="%{rpmcflags}"
+%{__make} elf \
+	ELF_CFLAGS="%{rpmcflags} -fPIC"
+%{__make} all \
+	CFLAGS="%{rpmcflags}"
+%{__make} -C slsh \
+	DL_LIB="-ldl" \
+	ARCH="elf" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -237,6 +242,9 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+# help rpmdeps
+chmod +x $RPM_BUILD_ROOT%{_libdir}/lib*.so*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
