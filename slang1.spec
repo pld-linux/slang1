@@ -133,7 +133,7 @@ make install install-elf install-links \
 	prefix=$RPM_BUILD_ROOT/usr \
 	install_include_dir=$RPM_BUILD_ROOT/usr/include/slang
 	
-install -s slsh/slsh $RPM_BUILD_ROOT/usr/bin 
+install -s slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT/usr/src/examples/slang
 
@@ -150,7 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 
 %files devel
 %defattr(644,root,root,755)
