@@ -1,4 +1,3 @@
-# _without_embed - don't build uClibc version
 %define		docver  1.4
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library für eine C-artige Sprache
