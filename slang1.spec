@@ -1,5 +1,7 @@
-# conditional build:
+#
+# Conditional build:
 # --with uClibc		- used in building against uClibc
+#
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library fЭr eine C-artige Sprache
@@ -11,7 +13,7 @@ Summary(ru):	Разделяемая библиотека C-подобного языка расширения S-Lang
 Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
-Version:	1.4.8
+Version:	1.4.9
 Release:	1
 Epoch:		1
 License:	GPL
