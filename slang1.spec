@@ -15,7 +15,7 @@ Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}-%{version}.tar.gz
 Source1:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
-Buildroot:   	/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Slang (pronounced ``sssslang'') is a powerful stack based interpreter that
