@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.5
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -17,6 +17,7 @@ Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-uclibc_ac_fix.patch
 Patch4:		%{name}-remove_unused_terminfo_paths.patch
+Patch5:		%{name}-cc.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -118,6 +119,7 @@ Biblioteka statyczna slang.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 mv -f autoconf/aclocal.m4 acinclude.m4
@@ -130,7 +132,7 @@ aclocal
 autoconf)
 %configure
 
-%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC" CC="%{__cc}"
+%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC"
 %{__make} all CFLAGS="%{rpmcflags}"
 %{__make} -C slsh DL_LIB="-ldl" ARCH="elf" CFLAGS="%{rpmcflags}"
 
