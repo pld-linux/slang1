@@ -137,7 +137,7 @@ install -s slsh/slsh $RPM_BUILD_ROOT/usr/bin
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT/usr/src/examples/slang
 
-strip --strip-unneeded $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 gzip -9fn doc/sgml/* doc/*.txt 
 
@@ -149,19 +149,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/lib/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 %attr(755,root,root) /usr/bin/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/sgml/* doc/*.txt*
 %doc /usr/src/examples/slang
-/usr/lib/libslang.so
+%{_libdir}/libslang.so
 /usr/include/slang
 
 %files static
 %defattr(644,root,root,755)
-/usr/lib/libslang.a
+%{_libdir}/libslang.a
 
 %changelog
 * Wed May 12 1999 Artur Frysiak <wiget@pld.org.pl>
