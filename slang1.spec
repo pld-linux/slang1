@@ -9,7 +9,7 @@ Summary(ru):	Разделяемая библиотека C-подобного языка расширения S-Lang
 Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
-Version:	1.4.6
+Version:	1.4.7
 Release:	1
 Epoch:		1
 License:	GPL
