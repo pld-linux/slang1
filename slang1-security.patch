@@ -1,5 +1,5 @@
---- slang1.3.5/src/sltermin.c.old	Tue Jan 12 06:29:12 1999
-+++ slang1.3.5/src/sltermin.c	Wed May 12 17:17:15 1999
+--- slang-1.4.5/src/sltermin.c.orig	Sun Feb 10 08:39:20 2002
++++ slang-1.4.5/src/sltermin.c	Wed Feb 27 02:27:57 2002
 @@ -105,7 +105,31 @@
      * I will also look into the use of setreuid, seteuid and setregid, setegid.
      * FIXME: Priority=medium
@@ -32,12 +32,12 @@
     if (fp == NULL) return NULL;
  
     if ((12 == fread ((char *) buf, 1, 12, fp) && (MAGIC == make_integer (buf))))
-@@ -278,7 +302,7 @@
- 	if ((tidir != NULL)
- 	    && (sizeof (file) > strlen (tidir) + 2 + strlen (term)))
- 	  {
--	     sprintf (file, "%s/%c/%s", tidir, *term, term);
-+	     snprintf (file, sizeof(file), "%s/%c/%s", tidir, *term, term);
- 	     if (NULL != (fp = open_terminfo (file, ti)))
- 	       break;
- 	  }
+@@ -285,7 +309,7 @@
+ 
+ 	     if (sizeof (file) > strlen (tidir) + 2 + strlen (term))
+ 	       {
+-		  sprintf (file, "%s/%c/%s", tidir, *term, term);
++		  snprintf (file, "%s/%c/%s", tidir, *term, term);
+ 		  if (NULL != (fp = open_terminfo (file, ti)))
+ 		    break;
+ 	       }
