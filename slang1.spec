@@ -116,7 +116,7 @@ ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" \
 LDFLAGS="-s" \
 ./configure \
 	--prefix=/usr \
-	--includedir=/usr/include/slang \
+	--includedir=%{_includedir}/slang \
 	--host=%{_host_alias} \
 	--target=%{_target_platform}
 	
@@ -131,7 +131,7 @@ install -d $RPM_BUILD_ROOT/usr/{bin,src/examples/slang}
 
 make install install-elf install-links \
 	prefix=$RPM_BUILD_ROOT/usr \
-	install_include_dir=$RPM_BUILD_ROOT/usr/include/slang
+	install_include_dir=$RPM_BUILD_ROOT%{_includedir}/slang
 	
 install -s slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
 
@@ -157,7 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/sgml/* doc/*.txt*
 %doc /usr/src/examples/slang
 %{_libdir}/libslang.so
-/usr/include/slang
+%{_includedir}/slang
 
 %files static
 %defattr(644,root,root,755)
