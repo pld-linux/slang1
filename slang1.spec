@@ -1,5 +1,7 @@
-# conditional build:
+#
+# Conditional build:
 # --with uClibc		- used in building against uClibc
+#
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library fЭr eine C-artige Sprache
@@ -17,7 +19,9 @@ Epoch:		1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
+# Source0-md5:	4fbb1a7f1257e065ca830deefe13d350
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{docver}-doc.tar.bz2
+# Source1-md5:	7dac82b282494affcf619730bbee0d6c
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
@@ -119,7 +123,7 @@ Summary(ru):	Библиотеки и хедеры для C-подобного языка S-Lang
 Summary(tr):	slang dili iГin statik kitaplЩk ve baЧlЩk dosyalarЩ
 Summary(uk):	Б╕бл╕отеки та хедери для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Obsoletes:	libslang1-devel
 
 %description devel
@@ -169,7 +173,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com slang
 Summary(ru):	Статическая библиотека для C-подобного языка S-Lang
 Summary(uk):	Статична б╕бл╕отека для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 This package contains the slang static libraries.
@@ -221,9 +225,12 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-%{__make} install-elf DESTDIR=$RPM_BUILD_ROOT
-%{__make} install-links DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-elf \
+	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-links \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
