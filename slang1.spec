@@ -247,6 +247,7 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.1
+ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang.so.1
 ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
 ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
 
@@ -266,7 +267,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %files devel
 %defattr(644,root,root,755)
