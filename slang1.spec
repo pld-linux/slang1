@@ -5,14 +5,14 @@ Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
-Version:   	1.3.10
+Version:   	1.4.0
 Release:     	1
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
-Source0:	ftp://space.mit.edu/pub/davis/slang/%{name}-%{version}.tar.bz2
-Source1:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{docver}-doc.tar.gz
+Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
+Source1:      	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
 BuildRoot:	/tmp/%{name}-%{version}-root
