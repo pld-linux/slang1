@@ -155,7 +155,7 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 # BOOT version
 install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib
 install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
-install -s libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib/libslang.a
+install libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib/libslang.a
 install src/slang.h src/slcurses.h $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
 %endif
 
