@@ -5,13 +5,13 @@ Summary(fr):	Biblioth鋂ue partag嶪 pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil i蓾n ortak kitapl�k
 Name:      	slang
-Version:   	1.3.5
+Version:   	1.3.6
 Release:     	1
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
-Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
+Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}-%{version}.tar.gz
 Source1:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
@@ -106,7 +106,7 @@ Dieses Paket enth鄟t die statischen Libraries.
 Biblioteka statyczna slang.
 
 %prep
-%setup  -q -a1 -n %{name}%{version}
+%setup  -q -a1
 %patch0 -p1
 %patch1 -p1 
 
@@ -164,51 +164,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libslang.a
 
 %changelog
-* Wed May 12 1999 Artur Frysiak <wiget@pld.org.pl>
-  [1.3.5-1]
-- upgrade to 1.3.5
-- resync patches
-- added sgml docs
-- added examples and demos
-
-* Sat Dec 12 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [1.2.2-2]
-- added LDFLAGS="-s" to ./configure enviroment,
-- added patch.slang-1.2.2.keypad.1 which
-  prevents the Meta key from working with mutt (from mutt 0.95).
-
-* Fri Aug 28 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [1.2.2-1]
-- spec rewrited for using Buildroot,
-- added %clean section,
-- added using %%{name} in Source,
-- added static subpackage,
-- changed dependencies to "Requires: %%{name} = %%{version}" in devel
-  subpackage,
-- added stripping shared libraries,
-- added %attr and %defattr macros in %files (allows build package from
-  non-root account).
-
-* Fri Jun 26 1998 Alan Cox <alan@redhat.com>
-- Swat another hole. Open TERMINFO files as the real uid not the euid.
-
-* Fri Jun 26 1998 Alan Cox <alan@redhat.com>
-- There's a hole in my library Dear Red Hat Dear Red Hat
-- Squashed an sprintf arbitary length string into a small bufferon error
-  bug.
-
-* Tue May 05 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Sat Apr 18 1998 Erik Troan <ewt@redhat.com>
-- rebuilt to find terminfo in %{_datadir}
-
-* Tue Oct 14 1997 Donnie Barnes <djb@redhat.com>
-- spec file cleanups
-
-* Mon Sep 1 1997 Donnie Barnes <djb@redhat.com>
-- upgraded to 0.99.38 (will it EVER go 1.0???)
-- all patches removed (all appear to be in this version)
-
-* Thu Jun 19 1997 Erik Troan <ewt@redhat.com>
-- built against glibc
+* Fri May 21 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.3.6-1]
+- spec based on RH version,
+- rewrited by Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl> and Artur Frysiak
+  <wiget@pld.org.pl>
+- pl translation by Wojtek 奸usarczyk <wojtek@shadow.eu.org>.
