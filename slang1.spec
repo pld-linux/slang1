@@ -187,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/sgml/* doc/*.gz
+%doc doc/html doc/*.gz
 %attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}
 %{_examplesdir}/%{name}-%{version}
