@@ -680,17 +680,6 @@
  	     s++;
  	  }
  	r++;
---- slang-1.4.5/src/Makefile.in.foo	2002-06-12 19:30:09.000000000 -0400
-+++ slang-1.4.5/src/Makefile.in	2002-06-12 19:31:13.000000000 -0400
-@@ -67,7 +67,7 @@
- #---------------------------------------------------------------------------
- # There should be no need to change anything below here.
- #---------------------------------------------------------------------------
--THIS_LIB		= slang#
-+THIS_LIB		= slang-utf8#
- OTHERSTUFF 		= 
- THIS_LIB_DEFINES	= -DSLANG
- ELF_MAJOR_VERSION	= @slang_major_version@#
 --- slang-1.4.9/src/sldisply.c.orig	2003-10-27 17:24:15.000000000 -0500
 +++ slang-1.4.9/src/sldisply.c	2003-10-27 17:56:25.000000000 -0500
 @@ -9,6 +9,7 @@
