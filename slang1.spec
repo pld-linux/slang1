@@ -19,7 +19,7 @@ Epoch:		1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-# Source0-md5: 5192e043076fa42931dec1d0b1b0dce7
+# Source0-md5: 4fbb1a7f1257e065ca830deefe13d350
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{docver}-doc.tar.bz2
 # Source1-md5: 7dac82b282494affcf619730bbee0d6c
 Patch0:		%{name}-security.patch
@@ -246,7 +246,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/html doc/sgml/* doc/*.txt
+%doc doc/*.txt
 %attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}
 %{_examplesdir}/%{name}-%{version}
