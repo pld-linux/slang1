@@ -143,9 +143,9 @@ mv -f src/objs/libslang.a libslang.a-BOOT
 %endif
 
 # normal
-%{__make} elf
-%{__make} all
-%{__make} -C slsh DL_LIB="-ldl" ARCH="elf"
+%{__make} elf ELF_CFLAGS="%{rpmcflags} -fPIC"
+%{__make} all CFLAGS="%{rpmcflags}"
+%{__make} -C slsh DL_LIB="-ldl" ARCH="elf" CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
