@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
 Version:   	1.3.6
-Release:     	1
+Release:     	2
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
@@ -55,7 +55,7 @@ Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir yorumlayýcýdýr.
 C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye çevirmek oldukça
 kolaydýr.
 
-%package devel
+%package	devel
 Summary:   	header files for slang C like language
 Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache 
 Summary(fr):	En-têtes pour le langage slang
@@ -89,7 +89,7 @@ la documentation pour vous aider à écrire ces applications.
 Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk dosyalarý
 ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
 
-%package static
+%package	static
 Summary:     	slang static library
 Summary(pl): 	Biblioteka statyczna slang
 Group:       	Development/Libraries
@@ -115,10 +115,9 @@ CFLAGS="$RPM_OPT_FLAGS" \
 ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" \
 LDFLAGS="-s" \
 ./configure \
-	--prefix=/usr \
+	--prefix=%{_prefix} \
 	--includedir=%{_includedir}/slang \
-	--host=%{_host_alias} \
-	--target=%{_target_platform}
+	%{_target_platform}
 	
 make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
 make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
@@ -127,17 +126,17 @@ make DL_LIB="-ldl" ARCH="elf"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{bin,src/examples/slang}
+install -d $RPM_BUILD_ROOT%{_prefix}/{bin,src/slang}
 
 make install install-elf install-links \
-	prefix=$RPM_BUILD_ROOT/usr \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	install_include_dir=$RPM_BUILD_ROOT%{_includedir}/slang
 	
 install -s slsh/slsh $RPM_BUILD_ROOT%{_bindir} 
 
-cp -a modules examples demo src/curses $RPM_BUILD_ROOT/usr/src/examples/slang
-
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
+
+cp -a modules examples demo src/curses $RPM_BUILD_ROOT/usr/src/slang
 
 gzip -9fn doc/sgml/* doc/*.txt 
 
@@ -149,15 +148,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 %attr(755,root,root) %{_bindir}/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/sgml/* doc/*.txt*
-%doc /usr/src/examples/slang
-%{_libdir}/libslang.so
+
+%attr(755,root,root) %{_libdir}/libslang.so
 %{_includedir}/slang
+
+/usr/src/slang
 
 %files static
 %defattr(644,root,root,755)
