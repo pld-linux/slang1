@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_with	uClibc	# use hacks to build against uClibc
-%bcond_with	utf8	# utf8 support
+%bcond_without	utf8	# utf8 support
 #
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
