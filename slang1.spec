@@ -116,8 +116,8 @@ LDFLAGS="-s" \
 	--prefix=%{_prefix} \
 	--includedir=%{_includedir}/slang
 	
-make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS -g"
-make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS -g"
+make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
 cd slsh
 make DL_LIB="-ldl" ARCH="elf"
 
