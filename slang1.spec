@@ -4,11 +4,12 @@ Summary(fr): Bibliothèque partagée pour le langage d'extension C like
 Summary(tr): C benzeri dil için ortak kitaplýk
 Name:        slang
 Version:     1.2.2
-Release:     1
+Release:     2
 Copyright:   GPL
 Group:       Libraries
 Source:      ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
 Patch0:      slang-1.2.2-security.patch
+Patch1:      patch.slang-1.2.2.keypad.1
 URL:         ftp://space.mit.edu/pub/davis/slang/
 Buildroot:   /tmp/%{name}-%{version}-root
 
@@ -71,16 +72,21 @@ Dieses Paket enthält die statischen Libraries.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p1
 chmod +x configure
 
 %build
-CFLAGS=$RPM_OPT_FLAGS ./configure --prefix=/usr --includedir=/usr/include/slang
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
+	--prefix=/usr \
+	--includedir=/usr/include/slang
 make elf
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install install-elf prefix=$RPM_BUILD_ROOT/usr \
+make install install-elf \
+	prefix=$RPM_BUILD_ROOT/usr \
 	install_include_dir=$RPM_BUILD_ROOT/usr/include/slang
 
 mv doc/text/* .
@@ -106,6 +112,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root, root) /usr/lib/libslang.a
 
 %changelog
+* Sat Dec 12 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.2.2-2]
+- added LDFLAGS="-s" to ./configure enviroment,
+- added patch.slang-1.2.2.keypad.1 which
+  prevents the Meta key from working with mutt (from mutt 0.95).
+
 * Fri Aug 28 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.2-1]
 - spec rewrited for using Buildroot,
