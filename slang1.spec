@@ -6,6 +6,7 @@ Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
 Version:   	1.2.2
 Release:     	5
+Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
