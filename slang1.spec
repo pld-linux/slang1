@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.4
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -132,7 +132,6 @@ Group:		Development/Libraries
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 (cd autoconf ; mv -f acsite.m4 aclocal.m4 ; autoconf ; cp -f configure ..)
