@@ -14,6 +14,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	âÉÂÌÉÏÔÅËÉ
+Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		%{name}-security.patch
@@ -74,8 +77,12 @@ Summary(pl):	Pliki nag³ówkowe dla slanga
 Summary(tr):	slang dili için statik kitaplık ve başlık dosyaları
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
@@ -83,21 +90,21 @@ This package contains header files required to develop slang-based
 applications. It also includes documentation to help you write
 slang-based apps.
 
-%description -l de devel
+%description devel -l de
 Dieses Paket enthält Header-Dateien zum Entwickeln von slang-basierten
 Anwendungen. Dokumentation zum Schreiben von slang-basierten
 Anwendungen ist enthalten.
 
-%description -l fr devel
+%description devel -l fr
 Ce paquetage contient les bibliothèques statiques et les en-têtes
 slang pour développer des applications en slang. Il contient aussi la
 documentation pour vous aider à écrire ces applications.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet ten zawiera pliki nag³ówkowe slang. Znajduje siê tutaj równie¿
 dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod tê bibliotekê.
 
-%description -l tr devel
+%description devel -l tr
 Bu paket slang tabanlı uygulamalar geliştirmek için gereken başlık
 dosyaları ve kitaplıkların yanısıra slang yardım belgelerini de
 içerir.
@@ -107,25 +114,40 @@ Summary:	slang static library
 Summary(pl):	Biblioteka statyczna slang
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains the slang static libraries.
 
-%description -l de static
+%description static -l de
 Dieses Paket enthält die statischen Libraries.
 
-%description -l pl static
+%description static -l pl
 Biblioteka statyczna slang.
 
-%if %{?BOOT:1}%{!?BOOT:0}
 %package devel-BOOT
-Summary:	static slang for bootdisk (compiled against uClibc headers)
+Summary:	Static slang for bootdisk
+Summary(pl):	Statyczny slang dla bootkietki
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
+
 %description devel-BOOT
-%endif
+Static slang for bootdisk (compiled against uClibc headers).
+
+%description devel-BOOT -l pl
+Statyczny slang dla bootkietki (skompilowany z nag³ówkami uClibc).
 
 %prep
 %setup  -q -a1
@@ -158,10 +180,10 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
 %if %{?BOOT:1}%{!?BOOT:0}
 # BOOT version
-install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib
-install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
-install libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib/libslang.a
-install src/slang.h src/slcurses.h $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
+install -d $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_libdir}
+install -d $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_includedir}
+install libslang.a-BOOT $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_libdir}/libslang.a
+install src/slang.h src/slcurses.h $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_includedir}
 %endif
 
 %{__make} install install-elf install-links \
@@ -173,11 +195,11 @@ cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{
 
 gzip -9nf doc/sgml/* doc/*.txt 
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -198,6 +220,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?BOOT:1}%{!?BOOT:0}
 %files devel-BOOT
 %defattr(644,root,root,755)
-/usr/lib/bootdisk/usr/lib/*.a
-/usr/lib/bootdisk/%{_includedir}
+%{_libdir}/bootdisk%{_libdir}/*.a
+%{_libdir}/bootdisk%{_includedir}
 %endif
