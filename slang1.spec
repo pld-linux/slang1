@@ -116,16 +116,16 @@ LDFLAGS="-s" \
 	--prefix=%{_prefix} \
 	--includedir=%{_includedir}/slang
 	
-make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
-make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+%{__make} elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+%{__make} all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
 cd slsh
-make DL_LIB="-ldl" ARCH="elf"
+%{__make} DL_LIB="-ldl" ARCH="elf"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_prefix}/src/examples/slang,%{_bindir}}
 
-make install install-elf install-links \
+%{__make} install install-elf install-links \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	install_include_dir=$RPM_BUILD_ROOT%{_includedir}/slang
 	
