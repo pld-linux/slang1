@@ -1,0 +1,44 @@
+diff -Nru slang/src/sltermin.c slang.new/src/sltermin.c
+--- slang/src/sltermin.c	Fri Apr 24 08:17:09 1998
++++ slang.new/src/sltermin.c	Tue Aug 11 09:41:13 1998
+@@ -102,7 +102,31 @@
+    FILE *fp;
+    unsigned char buf[12];
+ 
++   /* If your system lacks setfsuid/getfsuid either write
++      equivalent support or dont use slang to build setuid/setgid
++      apps like Mutt */
++
++   if(setfsuid(getuid())==-1)
++   {
++   	perror("setfsuid");
++   	return NULL;
++   }
++   if(setfsgid(getgid())==-1)
++   {
++   	perror("setfsgid");
++   	return NULL;
++   }
+    fp = fopen (file, "rb");
++   if(setfsuid(geteuid())==-1)
++   {
++   	perror("setfsuid");
++   	return NULL;
++   }
++   if(setfsgid(getegid())==-1)
++   {
++   	perror("setfsgid");
++    	return NULL;
++   }
+    if (fp == NULL) return NULL;
+ 
+    if ((12 == fread ((char *) buf, 1, 12, fp) && (MAGIC == make_integer (buf))))
+@@ -275,7 +299,7 @@
+ 	if ((tidir != NULL)
+ 	    && (sizeof (file) > strlen (tidir) + 2 + strlen (term)))
+ 	  {
+-	     sprintf (file, "%s/%c/%s", tidir, *term, term);
++	     snprintf (file, sizeof(file), "%s/%c/%s", tidir, *term, term);
+ 	     if (NULL != (fp = open_terminfo (file, ti)))
+ 	       break;
+ 	  }
