@@ -14,7 +14,7 @@ Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
 Version:	1.4.9
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Libraries
