@@ -1,18 +1,20 @@
+%define		docver	1.4
 Summary:    	shared library for C like extension language
 Summary(de):	Shared Library für eine C-artige Sprache 
 Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:      	slang
-Version:   	1.2.2
-Release:     	5
+Version:   	1.3.5
+Release:     	1
 Serial:		1
 Copyright:   	GPL
 Group:       	Libraries
 Group(pl):	Biblioteki
-Source:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
-Patch0:      	slang-security.patch
-Patch1:      	slang-keypad.1.patch
+Source0:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{version}.tar.gz
+Source1:      	ftp://space.mit.edu/pub/davis/slang/%{name}%{docver}-doc.tar.gz
+Patch0:		slang-security.patch
+Patch1:		slang-keypad.1.patch
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
@@ -104,30 +106,40 @@ Dieses Paket enthält die statischen Libraries.
 Biblioteka statyczna slang.
 
 %prep
-%setup -q -n %{name}
+%setup  -q -a1 -n %{name}%{version}
 %patch0 -p1
-%patch1 -p1
-chmod +x configure
+%patch1 -p1 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+CFLAGS="$RPM_OPT_FLAGS" \
+ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" \
+LDFLAGS="-s" \
+./configure \
 	--prefix=/usr \
-	--includedir=/usr/include/slang
-make elf
-make
+	--includedir=/usr/include/slang \
+	--host=%{_host_alias} \
+	--target=%{_target_platform}
+	
+make elf ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+make all ELF_CFLAGS="$RPM_OPT_FLAGS -fPIC" CFLAGS="$RPM_OPT_FLAGS"
+cd slsh
+make DL_LIB="-ldl" ARCH="elf"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install install-elf \
+install -d $RPM_BUILD_ROOT/usr/{bin,src/examples/slang}
+
+make install install-elf install-links \
 	prefix=$RPM_BUILD_ROOT/usr \
 	install_include_dir=$RPM_BUILD_ROOT/usr/include/slang
+	
+install -s slsh/slsh $RPM_BUILD_ROOT/usr/bin 
 
-mv doc/text/* .
+cp -a modules examples demo src/curses $RPM_BUILD_ROOT/usr/src/examples/slang
 
-strip $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
 
-gzip -9fn {cref,cslang,slang,slangfun,changes}.txt
+gzip -9fn doc/sgml/* doc/*.txt 
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -138,10 +150,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/lib/lib*.so.*.*
+%attr(755,root,root) /usr/bin/*
 
 %files devel
 %defattr(644,root,root,755)
-%doc {cref,cslang,slang,slangfun,changes}.txt*
+%doc doc/sgml/* doc/*.txt*
+%doc /usr/src/examples/slang
 /usr/lib/libslang.so
 /usr/include/slang
 
@@ -150,6 +164,13 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/libslang.a
 
 %changelog
+* Wed May 12 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.3.5-1]
+- upgrade to 1.3.5
+- resync patches
+- added sgml docs
+- added examples and demos
+
 * Sat Dec 12 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.2.2-2]
 - added LDFLAGS="-s" to ./configure enviroment,
