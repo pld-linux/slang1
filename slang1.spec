@@ -201,7 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 - translations modified for de, fr, tr
 
 * Sat Apr 18 1998 Erik Troan <ewt@redhat.com>
-- rebuilt to find terminfo in /usr/share
+- rebuilt to find terminfo in %{_datadir}
 
 * Tue Oct 14 1997 Donnie Barnes <djb@redhat.com>
 - spec file cleanups
