@@ -1,3 +1,4 @@
+%define		docver  1.4
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library für eine C-artige Sprache 
 Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
@@ -12,7 +13,7 @@ Group:		Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{version}-doc.tar.gz
+Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
 BuildRoot:	/tmp/%{name}-%{version}-root
