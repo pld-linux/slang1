@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.4
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -21,6 +21,7 @@ Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-keymap.patch
 %{?BOOT:BuildRequires:	uClibc-devel-BOOT}
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/slang
@@ -94,7 +95,7 @@ documentation pour vous aider à écrire ces applications.
 
 %description -l pl devel
 Pakiet ten zawiera pliki nag³ówkowe slang. Znajduje siê tutaj równie¿
-dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod ta bibliotekê.
+dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod tê bibliotekê.
 
 %description -l tr devel
 Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk
@@ -134,6 +135,8 @@ Group:		Development/Libraries
 %patch3 -p1
 
 %build
+(cd autoconf ; mv -f acsite.m4 aclocal.m4 ; autoconf ; cp -f configure ..)
+(cd demo ; cp -f ../autoconf/aclocal.m4 . ; autoconf)
 %configure
 
 %if %{?BOOT:1}%{!?BOOT:0}
