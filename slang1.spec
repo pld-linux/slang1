@@ -1,4 +1,4 @@
-%define		docver  1.4
+%define		docver  1.4.3
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library fЭr eine C-artige Sprache
 Summary(es):	Biblioteca compartida para leguaje de extensiСn semejante a C
@@ -9,21 +9,21 @@ Summary(ru):	Разделяемая библиотека C-подобного языка расширения S-Lang
 Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
-Version:	1.4.5
-Release:	4
+Version:	1.4.6
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
+Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.bz2
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-uclibc_ac_fix.patch
 Patch4:		%{name}-remove_unused_terminfo_paths.patch
 Patch5:		%{name}-cc.patch
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	libslang1
 
@@ -203,9 +203,9 @@ mv -f autoconf/configure.in .
 %{__aclocal}
 %{__autoconf}
 cd demo
-	cp -f ../acinclude.m4 .
-	aclocal
-	autoconf
+cp -f ../acinclude.m4 .
+%{__aclocal}
+%{__autoconf}
 cd ..
 %configure
 
