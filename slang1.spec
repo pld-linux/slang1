@@ -173,7 +173,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com slang
 Summary(ru):	Статическая библиотека для C-подобного языка S-Lang
 Summary(uk):	Статична б╕бл╕отека для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 This package contains the slang static libraries.
