@@ -136,7 +136,7 @@ Group:		Development/Libraries
 %if %{?BOOT:1}%{!?BOOT:0}
 # BOOT version
 %{__make} all \
-	CFLAGS="-Os -fno-strength-reduce -I%{_libdir}/bootdisk/usr/include" \
+	CFLAGS="-m386 -Os -fno-strength-reduce -I%{_libdir}/bootdisk/usr/include" \
 	OTHERSTUFF=""
 mv -f src/objs/libslang.a libslang.a-BOOT
 %{__make} clean
