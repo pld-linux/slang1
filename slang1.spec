@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -17,6 +17,7 @@ Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-uclibc_ac_fix.patch
+Patch4:		%{name}-remove_unused_terminfo_paths.patch
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -117,6 +118,7 @@ Biblioteka statyczna slang.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 mv -f autoconf/aclocal.m4 acinclude.m4
