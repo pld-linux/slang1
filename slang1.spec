@@ -3,7 +3,7 @@
 %bcond_with	uClibc	# use hacks to build against uClibc
 %bcond_with	utf8	# utf8 support
 #
-%define		docver  1.4.8
+%define		docver	1.4.8
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library f¸r eine C-artige Sprache
 Summary(es):	Biblioteca compartida para leguaje de extensiÛn semejante a C
@@ -202,7 +202,7 @@ Bibliotecas est·ticas para desenvolvimento com slang.
 ›œ ◊…Àœ“…”‘œ◊’¿‘ÿ Slang.
 
 %prep
-%setup  -q -a1
+%setup -q -a1
 %patch0 -p1
 #%%patch1 -p1
 %patch2 -p1
@@ -268,7 +268,7 @@ chmod +x $RPM_BUILD_ROOT%{_libdir}/lib*.so*
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
