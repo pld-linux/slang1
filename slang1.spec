@@ -246,9 +246,9 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 %{__make} install-links \
 	DESTDIR=$RPM_BUILD_ROOT
 
-ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.1
-ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
-ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
+#ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.1
+#ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
+#ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
 
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
