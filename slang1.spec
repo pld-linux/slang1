@@ -29,6 +29,7 @@ Patch3:		%{name}-uclibc_ac_fix.patch
 Patch4:		%{name}-remove_unused_terminfo_paths.patch
 Patch5:		%{name}-cc.patch
 Patch6:		%{name}-uClibc.patch
+URL:		http://www.s-lang.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
