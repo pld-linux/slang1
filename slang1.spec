@@ -200,7 +200,7 @@ Bibliotecas estáticas para desenvolvimento com slang.
 %build
 mv -f autoconf/aclocal.m4 acinclude.m4
 mv -f autoconf/configure.in .
-aclocal
+%{__aclocal}
 %{__autoconf}
 cd demo
 	cp -f ../acinclude.m4 .
