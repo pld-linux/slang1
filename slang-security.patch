@@ -37,7 +37,7 @@
  	     if (sizeof (file) > strlen (tidir) + 2 + strlen (term))
  	       {
 -		  sprintf (file, "%s/%c/%s", tidir, *term, term);
-+		  snprintf (file, "%s/%c/%s", tidir, *term, term);
++		  snprintf (file, sizeof (file), "%s/%c/%s", tidir, *term, term);
  		  if (NULL != (fp = open_terminfo (file, ti)))
  		    break;
  	       }
