@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.4
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -18,7 +18,9 @@ Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
+#Patch2:		
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+%{?BOOT:BuildRequires:	uClibc-devel-BOOT}
 
 %define		_includedir	%{_prefix}/include/slang
 
@@ -116,6 +118,13 @@ Dieses Paket enthält die statischen Libraries.
 %description -l pl static
 Biblioteka statyczna slang.
 
+%if %{?BOOT:1}%{!?BOOT:0}
+%package devel-BOOT
+Summary:	static slang for bootdisk (compiled against uClibc headers)
+Group:		Development/Libraries
+%description devel-BOOT
+%endif
+
 %prep
 %setup  -q -a1
 %patch0 -p1
@@ -123,7 +132,17 @@ Biblioteka statyczna slang.
 
 %build
 %configure
-	
+
+%if %{?BOOT:1}%{!?BOOT:0}
+# BOOT version
+%{__make} all \
+	CFLAGS="-Os -fno-strength-reduce -I%{_libdir}/bootdisk/usr/include" \
+	OTHERSTUFF=""
+mv -f src/objs/libslang.a libslang.a-BOOT
+%{__make} clean
+%endif
+
+# normal
 %{__make} elf
 %{__make} all
 %{__make} -C slsh DL_LIB="-ldl" ARCH="elf"
@@ -131,6 +150,14 @@ Biblioteka statyczna slang.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
+
+%if %{?BOOT:1}%{!?BOOT:0}
+# BOOT version
+install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/lib
+install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
+install -s libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/lib/libslang.a
+install src/slang.h src/slcurses.h $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
+%endif
 
 %{__make} install install-elf install-links \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -162,3 +189,10 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libslang.a
+
+%if %{?BOOT:1}%{!?BOOT:0}
+%files devel-BOOT
+%defattr(644,root,root,755)
+/usr/lib/bootdisk/lib/*.a
+/usr/lib/bootdisk/%{_includedir}
+%endif
