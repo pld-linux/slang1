@@ -20,7 +20,7 @@ License:	GPL
 Group:		Libraries
 # There is only most recent version :(
 #Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-Source0:	http://piorun.ds.pg.gda.pl/~blues/SOURCES/%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	ce6a820dcc1e1b112d654626d90a84c2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{docver}-doc.tar.bz2
 # Source1-md5:	40f3b5534bbed147868199ce127ea014
