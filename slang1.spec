@@ -153,9 +153,9 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
 %if %{?BOOT:1}%{!?BOOT:0}
 # BOOT version
-install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/lib
+install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib
 install -d $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
-install -s libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/lib/libslang.a
+install -s libslang.a-BOOT $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/lib/libslang.a
 install src/slang.h src/slcurses.h $RPM_BUILD_ROOT/usr/lib/bootdisk/usr/include/slang
 %endif
 
@@ -193,6 +193,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?BOOT:1}%{!?BOOT:0}
 %files devel-BOOT
 %defattr(644,root,root,755)
-/usr/lib/bootdisk/lib/*.a
+/usr/lib/bootdisk/usr/lib/*.a
 /usr/lib/bootdisk/%{_includedir}
 %endif
