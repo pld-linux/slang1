@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
 Name:		slang
 Version:	1.4.4
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		Libraries
