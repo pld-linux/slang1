@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_with	uClibc	# use hacks to build against uClibc
+%bcond_with	utf8	# utf8 support
 #
 %define		docver  1.4.8
 Summary:	shared library for C like extension language
@@ -209,9 +210,11 @@ Bibliotecas estáticas para desenvolvimento com slang.
 %patch4 -p1
 %patch5 -p1
 %{?with_uClibc:%patch6 -p1}
+%if %{with utf8}
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%endif
 
 %build
 cp /usr/share/automake/config.sub autoconf
@@ -231,7 +234,7 @@ cd ..
 %{__make} all \
 	CFLAGS="%{rpmcflags}"
 
-ln -s libslang-utf8.so.%{version} src/elfobjs/libslang.so
+%{?with_utf8:ln -s libslang-utf8.so.%{version} src/elfobjs/libslang.so}
 
 %{__make} -C slsh \
 	DL_LIB="-ldl" \
@@ -249,9 +252,11 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 %{__make} install-links \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with utf8}
 ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.1
 ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
 ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
+%endif
 
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
