@@ -1,4 +1,4 @@
-%define		docver  1.4.3
+%define		docver  1.4.8
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library fЭr eine C-artige Sprache
 Summary(es):	Biblioteca compartida para leguaje de extensiСn semejante a C
@@ -9,13 +9,13 @@ Summary(ru):	Разделяемая библиотека C-подобного языка расширения S-Lang
 Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang
-Version:	1.4.7
+Version:	1.4.8
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.bz2
+Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{docver}-doc.tar.bz2
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
@@ -191,7 +191,7 @@ Bibliotecas estАticas para desenvolvimento com slang.
 %prep
 %setup  -q -a1
 %patch0 -p1
-%patch1 -p1
+#%%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -217,8 +217,9 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
-%{__make} install install-elf install-links \
-	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-elf DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-links DESTDIR=$RPM_BUILD_ROOT
 
 install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
 
