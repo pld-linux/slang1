@@ -1,39 +1,38 @@
-diff -Nru slang/src/sltermin.c slang.new/src/sltermin.c
---- slang/src/sltermin.c	Fri Apr 24 08:17:09 1998
-+++ slang.new/src/sltermin.c	Tue Aug 11 09:41:13 1998
-@@ -102,7 +102,31 @@
-    FILE *fp;
-    unsigned char buf[12];
- 
-+   /* If your system lacks setfsuid/getfsuid either write
-+      equivalent support or dont use slang to build setuid/setgid
-+      apps like Mutt */
-+
+--- slang1.3.5/src/sltermin.c.old	Tue Jan 12 06:29:12 1999
++++ slang1.3.5/src/sltermin.c	Wed May 12 17:17:15 1999
+@@ -105,7 +105,31 @@
+     * I will also look into the use of setreuid, seteuid and setregid, setegid.
+     * FIXME: Priority=medium
+     */
++    /* If your system lacks setfsuid/getfsuid either write
++       equivalent support or dont use slang to build setuid/setgid
++       apps like Mutt */
++ 
 +   if(setfsuid(getuid())==-1)
 +   {
-+   	perror("setfsuid");
-+   	return NULL;
++       perror("setfsuid");
++       return NULL;
 +   }
 +   if(setfsgid(getgid())==-1)
 +   {
-+   	perror("setfsgid");
-+   	return NULL;
++       perror("setfsgid");
++       return NULL;
 +   }
     fp = fopen (file, "rb");
 +   if(setfsuid(geteuid())==-1)
 +   {
-+   	perror("setfsuid");
-+   	return NULL;
++       perror("setfsuid");
++       return NULL;
 +   }
 +   if(setfsgid(getegid())==-1)
 +   {
-+   	perror("setfsgid");
-+    	return NULL;
++       perror("setfsgid");
++       return NULL;
 +   }
     if (fp == NULL) return NULL;
  
     if ((12 == fread ((char *) buf, 1, 12, fp) && (MAGIC == make_integer (buf))))
-@@ -275,7 +299,7 @@
+@@ -278,7 +302,7 @@
  	if ((tidir != NULL)
  	    && (sizeof (file) > strlen (tidir) + 2 + strlen (term)))
  	  {
