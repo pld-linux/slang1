@@ -1,3 +1,4 @@
+# _without_embed - don't build uClibc version
 %define		docver  1.4
 Summary:	shared library for C like extension language
 Summary(de):	Shared Library f¸r eine C-artige Sprache 
@@ -6,7 +7,7 @@ Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil iÁin ortak kitapl˝k
 Name:		slang
 Version:	1.4.4
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -23,9 +24,18 @@ Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-nodevel.patch
 Patch3:		%{name}-keymap.patch
-%{?BOOT:BuildRequires:	uClibc-devel-BOOT}
+%if %{!?_without_embed:1}%{?_without_embed:0}
+BuildRequires:	uClibc-devel
+BuildRequires:	uClibc-static
+%endif
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define embed_path	/usr/lib/embed
+%define embed_cc	%{_arch}-uclibc-cc
+%define embed_cflags	%{rpmcflags} -Os
+%define embed_ldflags	%{rpmldflags} -static
+%define uclibc_prefix	/usr/%{_arch}-linux-uclibc
 
 %define		_includedir	%{_prefix}/include/slang
 
@@ -131,7 +141,7 @@ Dieses Paket enth‰lt die statischen Libraries.
 %description static -l pl
 Biblioteka statyczna slang.
 
-%package devel-BOOT
+%package devel-embed
 Summary:	Static slang for bootdisk
 Summary(pl):	Statyczny slang dla bootkietki
 Group:		Development/Libraries
@@ -143,10 +153,10 @@ Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
 Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 
-%description devel-BOOT
+%description devel-embed
 Static slang for bootdisk (compiled against uClibc headers).
 
-%description devel-BOOT -l pl
+%description devel-embed -l pl
 Statyczny slang dla bootkietki (skompilowany z nag≥Ûwkami uClibc).
 
 %prep
@@ -160,10 +170,11 @@ Statyczny slang dla bootkietki (skompilowany z nag≥Ûwkami uClibc).
 (cd demo ; cp -f ../autoconf/aclocal.m4 . ; autoconf)
 %configure
 
-%if %{?BOOT:1}%{!?BOOT:0}
+%if %{!?_without_embed:1}%{?_without_embed:0}
 # BOOT version
 %{__make} all \
-	CFLAGS="-m386 -Os -fno-strength-reduce -I%{_libdir}/bootdisk/usr/include" \
+	CC=%{embed_cc} \
+	CFLAGS="%{embed_cflags}" \
 	OTHERSTUFF=""
 mv -f src/objs/libslang.a libslang.a-BOOT
 %{__make} clean
@@ -178,12 +189,12 @@ mv -f src/objs/libslang.a libslang.a-BOOT
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_bindir}}
 
-%if %{?BOOT:1}%{!?BOOT:0}
+%if %{!?_without_embed:1}%{?_without_embed:0}
 # BOOT version
-install -d $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_libdir}
-install -d $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_includedir}
-install libslang.a-BOOT $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_libdir}/libslang.a
-install src/slang.h src/slcurses.h $RPM_BUILD_ROOT%{_libdir}/bootdisk%{_includedir}
+install -d $RPM_BUILD_ROOT%{uclibc_prefix}/lib
+install -d $RPM_BUILD_ROOT%{uclibc_prefix}/include/slang
+install libslang.a-BOOT $RPM_BUILD_ROOT%{uclibc_prefix}/lib/libslang.a
+install src/slang.h src/slcurses.h $RPM_BUILD_ROOT%{uclibc_prefix}/include/slang
 %endif
 
 %{__make} install install-elf install-links \
@@ -217,9 +228,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libslang.a
 
-%if %{?BOOT:1}%{!?BOOT:0}
-%files devel-BOOT
+%if %{!?_without_embed:1}%{?_without_embed:0}
+%files devel-embed
 %defattr(644,root,root,755)
-%{_libdir}/bootdisk%{_libdir}/*.a
-%{_libdir}/bootdisk%{_includedir}
+%{uclibc_prefix}/lib/*.a
+%{uclibc_prefix}/include/slang
 %endif
