@@ -15,7 +15,6 @@ Group(pl):	Biblioteki
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
 Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
 Patch0:		slang-security.patch
-Patch1:		slang-keypad.1.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -110,7 +109,6 @@ Biblioteka statyczna slang.
 %prep
 %setup  -q -a1
 %patch0 -p1
-%patch1 -p1 
 
 %build
 LDFLAGS="-s" \
