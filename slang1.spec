@@ -1,18 +1,18 @@
-%define		docver	1.4
-Summary:    	shared library for C like extension language
+Summary:	shared library for C like extension language
 Summary(de):	Shared Library für eine C-artige Sprache 
 Summary(fr):	Bibliothèque partagée pour le langage d'extension C like
 Summary(pl):	Biblioteka Slang
 Summary(tr):	C benzeri dil için ortak kitaplýk
-Name:      	slang
-Version:   	1.4.0
-Release:     	1
+Name:		slang
+Version:	1.4.0
+Release:	1
 Serial:		1
-Copyright:   	GPL
-Group:       	Libraries
+License:	GPL
+Group:		Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
-Source1:      	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{docver}-doc.tar.gz
+Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}%{version}-doc.tar.gz
 Patch0:		slang-security.patch
 Patch1:		slang-keypad.1.patch
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -26,44 +26,45 @@ efficient manner.  Since slang resembles C, it is easy to recode slang
 procedures in C if the need arises.
 
 %description -l de
-Slang (sprich ``sssslang'') ist ein leistungsfähiger stapelbasierter Interpreter,
-der eine C-ähnliche Syntax unterstützt. Er kann auf einfache Weise in ein
-Programm eingebettet werden, damit dieses erweiterbar wird. Slang bietet
-außerdem eine Möglichkeit zum schnellen Entwickeln und Debuggen der 
-Anwendung, in die er eingebettet ist. Da Slang C ähnlich ist, können
-Slang-Vorgänge einfach in C umgeschrieben werden.
+Slang (sprich ``sssslang'') ist ein leistungsfähiger stapelbasierter
+Interpreter, der eine C-ähnliche Syntax unterstützt. Er kann auf einfache
+Weise in ein Programm eingebettet werden, damit dieses erweiterbar wird.
+Slang bietet außerdem eine Möglichkeit zum schnellen Entwickeln und
+Debuggen der  Anwendung, in die er eingebettet ist. Da Slang C ähnlich ist,
+können Slang-Vorgänge einfach in C umgeschrieben werden.
 
 %description -l fr
 slang (prononcez « sssslang ») est un interpréteur puissant offrant une
 syntaxe à la C. Il a été conçu au début pour être facilement intégré dans
 un programme afin de le rendre extensible. slang offre aussi le moyen de
 developper et débugger rapidement l'application intégrée de façon sûre et
-efficace. Comme slang ressemble à C, il est facile de recoder les procédures
-slang en C si besoin est.
+efficace. Comme slang ressemble à C, il est facile de recoder les
+procédures slang en C si besoin est.
 
 %description -l pl
 Slang jest opart± o terminfo bibliotek± do obs³ugi terminali znakowych,
-posiadaj±c± wbudowany interpreter jêzyka podobnego sk³adniowo do C.
-Na pocz±tku by³ on przeznaczony aby ³atwo da³ siê osadzaæ w aplikacjê i
+posiadaj±c± wbudowany interpreter jêzyka podobnego sk³adniowo do C. Na
+pocz±tku by³ on przeznaczony aby ³atwo da³ siê osadzaæ w aplikacjê i
 uczyniæ j± rozszerzon±. Slang zapewnia mechanizmy u³atwiaj±ce szybkie
 tworzenie rozbudowanych, ³atwo konfigurowalnych aplikacji. Slang równie¿
 umo¿liwia proste prze¶ledzenie ewentualnych b³êdów w aplikacjach w
 bezpieczny i wydajny sposób.
 
 %description -l tr
-Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir yorumlayýcýdýr.
-C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye çevirmek oldukça
-kolaydýr.
+Slang, C'ye benzer bir yazýmý olan, güçlü, yýðýn-tabanlý bir
+yorumlayýcýdýr. C'ye benzer olduðundan Slang ile yazýlmýþ kodlarý C'ye
+çevirmek oldukça kolaydýr.
 
 %package devel
-Summary:   	header files for slang C like language
+Summary:	header files for slang C like language
 Summary(de):	Header-Dateien für eine Slangvariante der C-Sprache 
 Summary(fr):	En-têtes pour le langage slang
 Summary(pl):	Pliki nag³ówkowe dla slanga
 Summary(tr):	slang dili için statik kitaplýk ve baþlýk dosyalarý
-Group:       	Development/Libraries
-Group(pl):   	Programowanie/Biblioteki
-Requires:    	%{name} = %{version}
+Group:		Development/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 This package contains header files required to develop slang-based
@@ -72,29 +73,29 @@ apps.
 
 %description -l de devel
 Dieses Paket enthält Header-Dateien zum Entwickeln von slang-basierten
-Anwendungen. Dokumentation zum Schreiben von slang-basierten Anwendungen ist
-enthalten.
-
-%description -l pl devel
-Pakiet ten zawiera pliki nag³ówkowe slang. Znajduje siê tutaj
-równie¿ dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod
-ta bibliotekê.
+Anwendungen. Dokumentation zum Schreiben von slang-basierten Anwendungen
+ist enthalten.
 
 %description -l fr devel
-Ce paquetage contient les bibliothèques statiques et les en-têtes
-slang pour développer des applications en slang. Il contient aussi
-la documentation pour vous aider à écrire ces applications.
+Ce paquetage contient les bibliothèques statiques et les en-têtes slang
+pour développer des applications en slang. Il contient aussi la
+documentation pour vous aider à écrire ces applications.
+
+%description -l pl devel
+Pakiet ten zawiera pliki nag³ówkowe slang. Znajduje siê tutaj równie¿
+dokumentacja, która pomo¿e Ci w pisaniu aplikacji pod ta bibliotekê.
 
 %description -l tr devel
-Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk dosyalarý
-ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
+Bu paket slang tabanlý uygulamalar geliþtirmek için gereken baþlýk
+dosyalarý ve kitaplýklarýn yanýsýra slang yardým belgelerini de içerir.
 
 %package static
-Summary:     	slang static library
-Summary(pl): 	Biblioteka statyczna slang
-Group:       	Development/Libraries
-Group(pl):   	Programowanie/Biblioteki
-Requires:    	%{name}-devel = %{version}
+Summary:	slang static library
+Summary(pl):	Biblioteka statyczna slang
+Group:		Development/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains the slang static libraries.
@@ -135,7 +136,7 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_prefix}/src/examples/%{name}
 
-gzip -9fn doc/sgml/* doc/*.txt 
+gzip -9nf doc/sgml/* doc/*.txt 
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -144,6 +145,7 @@ gzip -9fn doc/sgml/* doc/*.txt
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
