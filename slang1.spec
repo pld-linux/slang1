@@ -38,6 +38,7 @@ URL:		http://www.s-lang.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 Obsoletes:	libslang1
+%{?with_utf8:Provides: slang(utf8)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/slang
@@ -130,6 +131,8 @@ Summary(tr):	slang dili iГin statik kitaplЩk ve baЧlЩk dosyalarЩ
 Summary(uk):	Б╕бл╕отеки та хедери для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+%{?with_utf8:Requires: slang(utf8)}
+%{?with_utf8:Provides: slang-devel(utf8)}
 Obsoletes:	libslang1-devel
 
 %description devel
@@ -180,6 +183,8 @@ Summary(ru):	Статическая библиотека для C-подобного языка S-Lang
 Summary(uk):	Статична б╕бл╕отека для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+%{?with_utf8:Requires: slang-devel(utf8)}
+%{?with_utf8:Provides: slang-static(utf8)}
 
 %description static
 This package contains the slang static libraries.
