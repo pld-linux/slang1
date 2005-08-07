@@ -13,15 +13,15 @@ Summary(pt_BR):	Biblioteca compartilhada para linguagem de extensЦo semelhante a
 Summary(ru):	Разделяемая библиотека C-подобного языка расширения S-Lang
 Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
-Name:		slang
+Name:		slang1
 Version:	1.4.9
-Release:	8%{?with_utf8:utf8}
+Release:	0.1%{?with_utf8:utf8}
 Epoch:		1
 License:	GPL
 Group:		Libraries
-Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{version}.tar.bz2
+Source0:	ftp://space.mit.edu/pub/davis/slang/v1.4/slang-%{version}.tar.bz2
 # Source0-md5:	4fbb1a7f1257e065ca830deefe13d350
-Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/%{name}-%{docver}-doc.tar.bz2
+Source1:	ftp://space.mit.edu/pub/davis/slang/v1.4/slang-%{docver}-doc.tar.bz2
 # Source1-md5:	7dac82b282494affcf619730bbee0d6c
 Patch0:		%{name}-security.patch
 Patch1:		%{name}-DESTDIR.patch
@@ -37,7 +37,9 @@ Patch9:		%{name}-utf8-fix.patch
 URL:		http://www.s-lang.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+Provides:	slang = %{epoch}:%{version}-%{release}
 Obsoletes:	libslang1
+Obsoletes:	slang < 2.0.0
 %{?with_utf8:Provides: slang(utf8)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -131,9 +133,11 @@ Summary(tr):	slang dili iГin statik kitaplЩk ve baЧlЩk dosyalarЩ
 Summary(uk):	Б╕бл╕отеки та хедери для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Provides:	slang-devel = %{epoch}:%{version}-%{release}
 %{?with_utf8:Requires: slang(utf8)}
 %{?with_utf8:Provides: slang-devel(utf8)}
 Obsoletes:	libslang1-devel
+Obsoletes:	slang-devel < 2.0.0
 
 %description devel
 This package contains header files required to develop slang-based
@@ -182,9 +186,11 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com slang
 Summary(ru):	Статическая библиотека для C-подобного языка S-Lang
 Summary(uk):	Статична б╕бл╕отека для C-под╕бно╖ мови S-Lang
 Group:		Development/Libraries
+Provides:	slang-static = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 %{?with_utf8:Requires: slang-devel(utf8)}
 %{?with_utf8:Provides: slang-static(utf8)}
+Obsoletes:	slang-static < 2.0.0
 
 %description static
 This package contains the slang static libraries.
@@ -207,7 +213,7 @@ Bibliotecas estАticas para desenvolvimento com slang.
 що використовують Slang.
 
 %prep
-%setup -q -a1
+%setup -q -n slang-%{version} -a1
 %patch0 -p1
 #%%patch1 -p1
 %patch2 -p1
