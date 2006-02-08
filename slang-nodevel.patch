@@ -1,14 +1,13 @@
-diff -urN slang-2.0.4.org/slsh/Makefile.in slang-2.0.4/slsh/Makefile.in
---- slang-2.0.4.org/slsh/Makefile.in	2005-06-20 17:56:22.000000000 +0200
-+++ slang-2.0.4/slsh/Makefile.in	2005-08-07 12:44:09.000000000 +0200
-@@ -6,8 +6,8 @@
- #---------------------------------------------------------------------------
+--- slang-2.0.6/slsh/Makefile.in.orig	2006-02-05 21:47:31.000000000 +0100
++++ slang-2.0.6/slsh/Makefile.in	2006-02-08 22:09:41.398225500 +0100
+@@ -7,8 +7,8 @@
  prefix 		= @prefix@
  exec_prefix 	= @exec_prefix@
+ INST_LIB_DIR	= @libdir@
 -SLANG_INST_INC	= -I@includedir@
--SLANG_INST_LIB	= -L@libdir@ -lslang
+-SLANG_INST_LIB	= -L$(INST_LIB_DIR)
 +SLANG_INST_INC	= -I@SRCDIR@ -I@includedir@
-+SLANG_INST_LIB	= -L@OBJDIR@ -L@ELFDIR@ -L@libdir@ -lslang
++SLANG_INST_LIB	= -L@OBJDIR@ -L@ELFDIR@ -L$(INST_LIB_DIR)
  #---------------------------------------------------------------------------
  SLANG_SRCINC	= -I@SRCDIR@
- SLANG_SRCLIB	= -L@OBJDIR@ -L@ELFDIR@ -lslang
+ SLANG_SRCLIB	= -L@OBJDIR@ -L@ELFDIR@
