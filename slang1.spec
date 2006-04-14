@@ -15,7 +15,7 @@ Summary(tr):	C benzeri dil iГin ortak kitaplЩk
 Summary(uk):	Б╕бл╕отека сп╕льного користування C-под╕бно╖ мови розширення S-Lang
 Name:		slang1
 Version:	1.4.9
-Release:	0.1%{?with_utf8:utf8}
+Release:	0.2%{?with_utf8:utf8}
 Epoch:		1
 License:	GPL
 Group:		Libraries
@@ -43,7 +43,7 @@ Obsoletes:	slang < 2.0.0
 %{?with_utf8:Provides: slang(utf8)}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_includedir	%{_prefix}/include/slang
+%define		_includedir	%{_prefix}/include/slang1
 
 %description
 Slang (pronounced ``sssslang'') is a powerful stack based interpreter
@@ -268,8 +268,9 @@ ln -sf libslang-utf8.so.%{version} ${RPM_BUILD_ROOT}%{_libdir}/libslang-utf8.so.
 ln -sf libslang-utf8.so ${RPM_BUILD_ROOT}%{_libdir}/libslang.so
 ln -sf libslang-utf8.a ${RPM_BUILD_ROOT}%{_libdir}/libslang.a
 %endif
+mv $RPM_BUILD_ROOT%{_libdir}/libslang{,1}.so
 
-install slsh/slsh $RPM_BUILD_ROOT%{_bindir}
+install slsh/slsh $RPM_BUILD_ROOT%{_bindir}/slsh1
 
 cp -a modules examples demo src/curses $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -290,7 +291,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc doc/*.txt
-%attr(755,root,root) %{_libdir}/libslang*.so
+%attr(755,root,root) %{_libdir}/libslang1.so
 %{_includedir}
 %{_examplesdir}/%{name}-%{version}
 
