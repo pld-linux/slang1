@@ -5,14 +5,14 @@
 #
 %define		docver	1.4.8
 Summary:	shared library for C like extension language
-Summary(de.UTF-8):   Shared Library für eine C-artige Sprache
-Summary(es.UTF-8):   Biblioteca compartida para leguaje de extensión semejante a C
-Summary(fr.UTF-8):   Bibliothèque partagée pour le langage d'extension C like
-Summary(pl.UTF-8):   Biblioteka Slang
-Summary(pt_BR.UTF-8):   Biblioteca compartilhada para linguagem de extensão semelhante a C
-Summary(ru.UTF-8):   Разделяемая библиотека C-подобного языка расширения S-Lang
-Summary(tr.UTF-8):   C benzeri dil için ortak kitaplık
-Summary(uk.UTF-8):   Бібліотека спільного користування C-подібної мови розширення S-Lang
+Summary(de.UTF-8):	Shared Library für eine C-artige Sprache
+Summary(es.UTF-8):	Biblioteca compartida para leguaje de extensión semejante a C
+Summary(fr.UTF-8):	Bibliothèque partagée pour le langage d'extension C like
+Summary(pl.UTF-8):	Biblioteka Slang
+Summary(pt_BR.UTF-8):	Biblioteca compartilhada para linguagem de extensão semelhante a C
+Summary(ru.UTF-8):	Разделяемая библиотека C-подобного языка расширения S-Lang
+Summary(tr.UTF-8):	C benzeri dil için ortak kitaplık
+Summary(uk.UTF-8):	Бібліотека спільного користування C-подібної мови розширення S-Lang
 Name:		slang1
 Version:	1.4.9
 Release:	0.2%{?with_utf8:utf8}
@@ -123,14 +123,14 @@ Slang - це потужний стековий інтерпретатор, що 
 
 %package devel
 Summary:	header files for slang C like language
-Summary(de.UTF-8):   Header-Dateien für eine Slangvariante der C-Sprache
-Summary(es.UTF-8):   Biblioteca y archivos de inclusión para slang
-Summary(fr.UTF-8):   En-têtes pour le langage slang
-Summary(pl.UTF-8):   Pliki nagłówkowe dla slanga
-Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusão para slang
-Summary(ru.UTF-8):   Библиотеки и хедеры для C-подобного языка S-Lang
-Summary(tr.UTF-8):   slang dili için statik kitaplık ve başlık dosyaları
-Summary(uk.UTF-8):   Бібліотеки та хедери для C-подібної мови S-Lang
+Summary(de.UTF-8):	Header-Dateien für eine Slangvariante der C-Sprache
+Summary(es.UTF-8):	Biblioteca y archivos de inclusión para slang
+Summary(fr.UTF-8):	En-têtes pour le langage slang
+Summary(pl.UTF-8):	Pliki nagłówkowe dla slanga
+Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para slang
+Summary(ru.UTF-8):	Библиотеки и хедеры для C-подобного языка S-Lang
+Summary(tr.UTF-8):	slang dili için statik kitaplık ve başlık dosyaları
+Summary(uk.UTF-8):	Бібліотеки та хедери для C-подібної мови S-Lang
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	slang-devel = %{epoch}:%{version}-%{release}
@@ -181,10 +181,10 @@ içerir.
 
 %package static
 Summary:	slang static library
-Summary(pl.UTF-8):   Biblioteka statyczna slang
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com slang
-Summary(ru.UTF-8):   Статическая библиотека для C-подобного языка S-Lang
-Summary(uk.UTF-8):   Статична бібліотека для C-подібної мови S-Lang
+Summary(pl.UTF-8):	Biblioteka statyczna slang
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com slang
+Summary(ru.UTF-8):	Статическая библиотека для C-подобного языка S-Lang
+Summary(uk.UTF-8):	Статична бібліотека для C-подібної мови S-Lang
 Group:		Development/Libraries
 Provides:	slang-static = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
